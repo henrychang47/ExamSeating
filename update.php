@@ -7,7 +7,7 @@
     
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "UPDATE seatings SET stuIDArr='" .$_GET["newStr"] ."' WHERE seatingID = 1";
+        $sql = "UPDATE Seating SET username_array='" .$_GET["newStr"] ."' WHERE seatingID = 1";
       
         // Prepare statement
         $stmt = $dbh->prepare($sql);
