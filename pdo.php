@@ -12,19 +12,21 @@ try {
 
     $i=0;
     $seating = array();
-    $examID = 1;//eid to check
+    $tocheck_examID = 1;
     $seatingID = null;
     $seatIDARR = array();
     $stuIDArr = array();
+    $statusArr = array();
 
     foreach ($dbh->query('SELECT * from Seating where examID=1') as $row) {
         //print_r($row); //你可以用 echo($GLOBAL); 来看到这些值
         //echo $row["id"] . " " . $row["state"] . "<br>";
         //$classroom[$i]["id"] = $row["id"];
         //$classroom[$i++]["state"] = $row["state"];
-        if($row["examID"] == $examID){
+        if($row["examID"] == $tocheck_examID){
             $seatIDArr = explode(',', $row["seatID_array"]);
             $stuIDArr = explode(',', $row["username_array"]);
+            $statusArr = explode(',', $row["status_array"]);
             break;
         }
     }
@@ -48,6 +50,7 @@ try {
     window.examID=<?php echo $examID ?>;
     window.seatIDArr = <?php echo json_encode($seatIDArr); ?>;
     window.stuIDArr = <?php echo json_encode($stuIDArr); ?>;
+    window.statusArr = <?php echo json_encode($statusArr); ?>;
     window.backupSeatID = seatIDArr.slice();
     window.backupStuID = stuIDArr.slice();
 </script>  

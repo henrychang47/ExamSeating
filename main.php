@@ -125,8 +125,9 @@
                     <h2 id="seatingid">座位表id: </h2>
                     <h2 id="examid">考試id: </h2>
                     <h2 id="states">考試狀態: </h2>
-                    <div class="state_colors state_assigned"></div><h3 id="state_assigned">已分配</h3>
                     <div class="state_colors state_unassigned"></div><h3 id="state_unassigned">空位</h3>
+                    <div class="state_colors state_login"></div><h3 id="state_login">正常登入</h3> 
+                    <div class="state_colors state_backupLogin"></div><h3 id="state_backupLogin">備用登入</h3>
                     </div>
                 </td>
             </tr>
@@ -146,12 +147,16 @@
             border: 1px solid rgba(0, 0, 0, .2);
         }
 
-        .state_assigned {
-            background: #EBC57C;
+        .state_unassigned {
+            background: #CFD2DE;
+         }
+
+        .state_login {
+            background: #D1E1CB;
         }
 
-        .state_unassigned {
-            background: #A6C2CE;
+        .state_backupLogin{
+            background: #F5BE8E;
         }
     </style>
 

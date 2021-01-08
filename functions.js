@@ -62,11 +62,14 @@ function stateAutoRefresh() {
 
     seatIDArr.forEach(function(seatID, index) {
         cell = graph.getModel().getCell(seatID);
-        if (stuIDArr[index] != "n") {
-            cell.setStyle("fillColor=#EBC57C");
+        if (statusArr[index] == "0") {
+            cell.setStyle("fillColor=#CFD2DE");
             cell.setValue(stuIDArr[index]);
-        } else if (stuIDArr[index] == "n") {
-            cell.setStyle("fillColor=#A6C2CE");
+        } else if (statusArr[index] == "1") {
+            cell.setStyle("fillColor=#D1E1CB");
+            cell.setValue(cell.id);
+        } else if (statusArr[index] == "2") {
+            cell.setStyle("fillColor=#F5BE8E");
             cell.setValue(cell.id);
         }
     })
@@ -150,16 +153,15 @@ function setInfobox() {
     document.getElementById("state_unassigned").innerHTML += "(" + unassigned_count + ")";
 }
 
-function setAutoReload(value, change){
-    if(change){
+function setAutoReload(value, change) {
+    if (change) {
         window.clearTimeout(window.timeoutID);
     }
-    if(value > 0){
-        window.timeoutID = window.setTimeout(function(){location.href="main.php?autoReload="+value},value*1000);
+    if (value > 0) {
+        window.timeoutID = window.setTimeout(function() { location.href = "main.php?autoReload=" + value }, value * 1000);
         document.getElementById("autoReloader").value = value;
         console.log(timeoutID);
-    }
-    else if(value == 0){
-        location.href="main.php";
+    } else if (value == 0) {
+        location.href = "main.php";
     }
 }
