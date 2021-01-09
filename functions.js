@@ -44,6 +44,9 @@ function selectionChanged(graph) {
                 //alert("cancel");
                 graph.getSelectionModel().removeCell(cell);
             }
+            else if(moveto == "-1"){
+                statusArr[seatIDArr.indexOf(cell.id)] = 1;
+            }
             //輸入不可換入的座位號碼
             else if (stuIDArr[seatIDArr.indexOf(moveto)] != "n") {
                 alert("此座位不可用");
@@ -64,13 +67,13 @@ function stateAutoRefresh() {
         cell = graph.getModel().getCell(seatID);
         if (statusArr[index] == "0") {
             cell.setStyle("fillColor=#CFD2DE");
-            cell.setValue(stuIDArr[index]);
+            cell.setValue( "("+cell.id+")" );
         } else if (statusArr[index] == "1") {
             cell.setStyle("fillColor=#D1E1CB");
-            cell.setValue(cell.id);
+            cell.setValue(stuIDArr[index]);
         } else if (statusArr[index] == "2") {
             cell.setStyle("fillColor=#F5BE8E");
-            cell.setValue(cell.id);
+            cell.setValue(stuIDArr[index]);
         }
     })
 
@@ -96,7 +99,9 @@ function changeSeat(oldID, newID) {
     var newIndex = seatIDArr.indexOf(newID);
 
     stuIDArr[newIndex] = stuIDArr[oldIndex];
+    statusArr[newIndex] = "2";
     stuIDArr[oldIndex] = "n";
+    statusArr[oldIndex] = "0";
 }
 
 function editMode() {
@@ -130,27 +135,33 @@ function finishEdit() {
     document.getElementById("edit_message").innerText = "viewMode ";
     backupStuID = stuIDArr.slice();
 
-    newStr = stuIDArr.join(',');
-    console.log(newStr);
+    var newUsername = stuIDArr.join(',');
+    var newStatus = statusArr.join(',');
 
-    window.location.href = 'update.php?newStr=' + newStr;
+    var newdata = "newUsername=" + newUsername + "&" + "newStatus=" + newStatus;
+    //console.log(newdata);
+    window.location.href = 'update.php?' + newdata;
 }
 
 function setInfobox() {
     document.getElementById("seatingid").innerHTML += seatingID;
     document.getElementById("examid").innerHTML += examID;
 
-    var assigned_count = 0;
     var unassigned_count = 0;
-    stuIDArr.forEach(function(stu, index) {
-        if (stu == "n") {
+    var login_count = 0;
+    var backupLogin_count = 0;
+    statusArr.forEach(function(status, index) {
+        if (status == "0") {
             unassigned_count++;
-        } else {
-            assigned_count++;
+        }else if(status == "1"){
+            login_count++;
+        }else if(status == "2"){
+            backupLogin_count++;
         }
     })
-    document.getElementById("state_assigned").innerHTML += "(" + assigned_count + ")";
     document.getElementById("state_unassigned").innerHTML += "(" + unassigned_count + ")";
+    document.getElementById("state_login").innerHTML += "(" + login_count + ")";
+    document.getElementById("state_backupLogin").innerHTML += "(" + backupLogin_count + ")";
 }
 
 function setAutoReload(value, change) {

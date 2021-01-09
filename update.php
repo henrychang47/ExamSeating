@@ -4,10 +4,12 @@
     try {
         $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
         echo "连接成功<br/>";
-    
+
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "UPDATE Seating SET username_array='" .$_GET["newStr"] ."' WHERE seatingID = 1";
+        //echo $_GET["newUsername"];
+        //echo $_GET["newStatus"];
+        $sql = "UPDATE Seating SET username_array= '" . $_GET["newUsername"] . "',status_array='" . $_GET["newStatus"] . "' WHERE seatingID = 1";
       
         // Prepare statement
         $stmt = $dbh->prepare($sql);

@@ -83,12 +83,9 @@
     <body onload="main(document.getElementById('graphContainer'))" style="margin:4px;">
 
         <table style="margin-left:auto; margin-right:auto; width:1600px; text-align:center;">
-            <tr>
-                
+            <tr>          
                 <td >
-                   
                     <div id="tools" style="border: solid 3px black; padding: 10px;  height: 50px;">
-                        
                         <button class="tool_button">離開</button>
                         <button class="tool_button" onclick="editMode()" id="editBtn">變更座位</button>
                         <button class="tool_button" onclick="cancelEdit()" id="cancelEditBtn" disabled="true">取消變更</button>
