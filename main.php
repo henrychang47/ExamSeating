@@ -112,7 +112,7 @@
                     </div>
                 </td>
                 <td>
-                    <div id="properties" style="border: solid 3px black; padding: 10px; width:400px;height:570px;">
+                    <div id="properties" style="border: solid 3px black; padding: 10px; width:400px;height:570px;font-size:30px">
                     </div>
                 </td>
             </tr>

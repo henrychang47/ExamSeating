@@ -25,12 +25,19 @@ function selectionChanged(graph) {
         // Writes the title
         var center = document.createElement('center');
 
-        mxUtils.writeln(center, 'cell id: ' + cell.id);
-        if (stuIDArr[seatIDArr.indexOf(cell.id)] != "n") {
-            mxUtils.writeln(center, "學號: " + cell.getValue() + "");
+        mxUtils.writeln(center, '座位id: ' + cell.id);
+        mxUtils.writeln(center, "-------------------------------------")
+        if ( seatIDArr.includes(cell.id) ){
+            
+            if (stuIDArr[seatIDArr.indexOf(cell.id)] != "n") {
+                mxUtils.writeln(center, "帳號: " + cell.getValue() + "");
+                mxUtils.writeln(center, "姓名: "+nameArr[seatIDArr.indexOf(cell.id)]);
+            }
+
+        }else{
+            mxUtils.writeln(center, "未登記的座位");
         }
-
-
+ 
         div.appendChild(center);
         mxUtils.br(div);
 

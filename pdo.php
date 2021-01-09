@@ -17,6 +17,9 @@ try {
     $seatIDARR = array();
     $stuIDArr = array();
     $statusArr = array();
+    $nameArr = array();
+
+    $dbh->query("SET NAMES 'UTF8'");
 
     foreach ($dbh->query('SELECT * from Seating where examID=1') as $row) {
         //print_r($row); //你可以用 echo($GLOBAL); 来看到这些值
@@ -30,7 +33,18 @@ try {
             break;
         }
     }
-
+    foreach( $stuIDArr as $username){
+        if(strcmp($username, "n")!=0){
+            $name = $dbh->query("SELECT name from users where username ='".$username."'")->fetch(PDO::FETCH_ASSOC);
+            if(isset($name['name'])){
+                array_push($nameArr,$name['name']);
+            }else{
+                array_push($nameArr,"");
+            }
+        }else{
+            array_push($nameArr,"n");
+        }
+    }
 
     $info = $dbh->query("SELECT seatingID,examID FROM Seating WHERE examID=1")->fetch(PDO::FETCH_ASSOC);
     $seatingID = $info['seatingID'];
@@ -51,6 +65,7 @@ try {
     window.seatIDArr = <?php echo json_encode($seatIDArr); ?>;
     window.stuIDArr = <?php echo json_encode($stuIDArr); ?>;
     window.statusArr = <?php echo json_encode($statusArr); ?>;
+    window.nameArr = <?php echo json_encode($nameArr); ?>;
     window.backupSeatID = seatIDArr.slice();
     window.backupStuID = stuIDArr.slice();
 </script>  
