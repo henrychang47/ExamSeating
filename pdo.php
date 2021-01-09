@@ -18,6 +18,7 @@ try {
     $stuIDArr = array();
     $statusArr = array();
     $nameArr = array();
+    $classArr = array();
 
     $dbh->query("SET NAMES 'UTF8'");
 
@@ -35,14 +36,23 @@ try {
     }
     foreach( $stuIDArr as $username){
         if(strcmp($username, "n")!=0){
-            $name = $dbh->query("SELECT name from users where username ='".$username."'")->fetch(PDO::FETCH_ASSOC);
-            if(isset($name['name'])){
-                array_push($nameArr,$name['name']);
+            $info = $dbh->query("SELECT name,class from users where username ='".$username."'")->fetch(PDO::FETCH_ASSOC);
+            
+            if(isset($info['name'])){
+                array_push($nameArr,$info['name']);
             }else{
                 array_push($nameArr,"");
             }
+            
+            if(isset($info['class'])){
+                array_push($classArr,$info['class']);
+            }else{
+                array_push($classArr,"");
+            }
+
         }else{
             array_push($nameArr,"n");
+            array_push($classArr,"n");
         }
     }
 
@@ -66,6 +76,7 @@ try {
     window.stuIDArr = <?php echo json_encode($stuIDArr); ?>;
     window.statusArr = <?php echo json_encode($statusArr); ?>;
     window.nameArr = <?php echo json_encode($nameArr); ?>;
+    window.classArr = <?php echo json_encode($classArr); ?>;
     window.backupSeatID = seatIDArr.slice();
     window.backupStuID = stuIDArr.slice();
 </script>  

@@ -32,6 +32,7 @@ function selectionChanged(graph) {
             if (stuIDArr[seatIDArr.indexOf(cell.id)] != "n") {
                 mxUtils.writeln(center, "帳號: " + cell.getValue() + "");
                 mxUtils.writeln(center, "姓名: "+nameArr[seatIDArr.indexOf(cell.id)]);
+                mxUtils.writeln(center, "班級: "+classArr[seatIDArr.indexOf(cell.id)]);
             }
 
         }else{
