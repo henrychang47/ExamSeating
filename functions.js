@@ -33,6 +33,8 @@ function selectionChanged(graph) {
                 mxUtils.writeln(center, "帳號: " + cell.getValue() + "");
                 mxUtils.writeln(center, "姓名: "+nameArr[seatIDArr.indexOf(cell.id)]);
                 mxUtils.writeln(center, "班級: "+classArr[seatIDArr.indexOf(cell.id)]);
+            }else{
+                mxUtils.writeln(center, "空位");
             }
 
         }else{
