@@ -68,6 +68,10 @@ function selectionChanged(graph) {
                 graph.getSelectionModel().removeCell(cell);
             } else if (moveto == "-1") {
                 statusArr[seatIDArr.indexOf(cell.id)] = 1;
+            } else if (moveto == "-2") {
+                statusArr[seatIDArr.indexOf(cell.id)] = 2;
+            } else if (moveto == "-3") {
+                statusArr[seatIDArr.indexOf(cell.id)] = 3;
             }
             //輸入不可換入的座位號碼
             else if (stuIDArr[seatIDArr.indexOf(moveto)] != "n") {
@@ -89,7 +93,11 @@ function stateAutoRefresh() {
         cell = graph.getModel().getCell(seatID);
         if (statusArr[index] == "0") {
             cell.setStyle("fillColor=#CFD2DE");
-            cell.setValue("(" + cell.id + ")");
+            if (stuIDArr[index] == "n") {
+                cell.setValue("(" + cell.id + ")");
+            } else {
+                cell.setValue(stuIDArr[index]);
+            }
         } else if (statusArr[index] == "1") {
             cell.setStyle("fillColor=#D1E1CB");
             cell.setValue(stuIDArr[index]);
@@ -97,6 +105,7 @@ function stateAutoRefresh() {
             cell.setStyle("fillColor=#F5BE8E");
             cell.setValue(stuIDArr[index]);
         }
+
     })
 
     graph.refresh();
@@ -121,7 +130,7 @@ function changeSeat(oldID, newID) {
     var newIndex = seatIDArr.indexOf(newID);
 
     stuIDArr[newIndex] = stuIDArr[oldIndex];
-    statusArr[newIndex] = "2";
+    statusArr[newIndex] = "0";
     stuIDArr[oldIndex] = "n";
     statusArr[oldIndex] = "0";
 }
@@ -161,7 +170,9 @@ function finishEdit() {
     var newUsername = stuIDArr.join(',');
     var newStatus = statusArr.join(',');
 
-    var newdata = "newUsername=" + newUsername + "&" + "newStatus=" + newStatus;
+    var newdata = "newUsername=" + newUsername + "&" + "newStatus=" + newStatus +
+        "&" + "examID=" + examID;
+
     //console.log(newdata);
     window.location.href = 'update.php?' + newdata;
 }

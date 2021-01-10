@@ -1,20 +1,22 @@
 <?php
-    require("pdo.php");
+    //require("pdo.php");
+
+    $dbms='mysql';
+    $host='118.232.212.69';
+    $dbName='SmartSeating';
+    $user='smartseating';
+    $pass='q96yji4jo4';
+    $dsn="$dbms:host=$host;dbname=$dbName";
 
     try {
         $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
-        echo "连接成功<br/>";
 
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        //echo $_GET["newUsername"];
-        //echo $_GET["newStatus"];
-        $sql = "UPDATE Seating SET username_array= '" . $_GET["newUsername"] . "',status_array='" . $_GET["newStatus"] . "' WHERE seatingID = 1";
-      
-        // Prepare statement
+        $sql = "UPDATE Seating SET username_array= '" 
+            . $_GET["newUsername"] . "',status_array='" 
+            . $_GET["newStatus"] . "' WHERE examID = ' " . $_GET['examID'] . " ' ";
         $stmt = $dbh->prepare($sql);
-      
-        // execute the query
         $stmt->execute();
       
         // echo a message to say the UPDATE succeeded
@@ -25,6 +27,14 @@
     }
 
 ?>
+<html>
+    <body>
+        <form id="eid" action="main.php" method="post">
+            <input type="hidden" name="examID" value="<?php echo $_GET['examID']?>">
+        </form>
+    </body>
+</html>
 <script>
-    window.location.href = 'main.php';
+    //window.location.href = 'main.php';
+    document.getElementById("eid").submit();
 </script>

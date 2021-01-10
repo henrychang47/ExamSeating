@@ -47,7 +47,7 @@ try {
         }
     }
 
-    $info = $dbh->query("SELECT seatingID,examID FROM Seating WHERE examID=1")->fetch(PDO::FETCH_ASSOC);
+    $info = $dbh->query("SELECT seatingID,examID FROM Seating WHERE examID=".$targetExamID)->fetch(PDO::FETCH_ASSOC);
     $seatingID = $info['seatingID'];
     $examID = $info['examID'];
 

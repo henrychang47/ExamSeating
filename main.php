@@ -45,7 +45,7 @@
 
                     graph.getModel().beginUpdate();
                     try {
-                        read(graph, examID+'.xml');                      
+                        read(graph, seatingID+'.xml');                      
                     } finally {
                         graph.getModel().endUpdate();
                     }
@@ -87,7 +87,7 @@
             <tr>          
                 <td >
                     <div id="tools" style="border: solid 3px black; padding: 10px;  height: 50px;">
-                        <button class="tool_button" onclick="history.back()">離開</button>
+                        <button class="tool_button" onclick="window.location.href = 'midpage.html';">離開</button>
                         <button class="tool_button" onclick="editMode()" id="editBtn">變更座位</button>
                         <button class="tool_button" onclick="cancelEdit()" id="cancelEditBtn" disabled="true">取消變更</button>
                         <button class="tool_button" onclick="finishEdit()" id="finishEditBtn" disabled="true">完成變更</button>
@@ -123,7 +123,7 @@
                     <h2 id="seatingid">座位表id: </h2>
                     <h2 id="examid">考試id: </h2>
                     <h2 id="states">考試狀態: </h2>
-                    <div class="state_colors state_unassigned"></div><h3 id="state_unassigned">空位</h3>
+                    <div class="state_colors state_unassigned"></div><h3 id="state_unassigned">未登入</h3>
                     <div class="state_colors state_login"></div><h3 id="state_login">正常登入</h3> 
                     <div class="state_colors state_backupLogin"></div><h3 id="state_backupLogin">備用登入</h3>
                     </div>
