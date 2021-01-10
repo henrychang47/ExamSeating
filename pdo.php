@@ -1,19 +1,15 @@
 <?php
-$dbms='mysql';     //数据库类型
-$host='118.232.212.69';//'localhost'; //数据库主机名
-$dbName='SmartSeating';//'test';    //使用的数据库
-$user='smartseating';//'root';      //数据库连接用户名
-$pass='q96yji4jo4';//'';          //对应的密码
+$dbms='mysql';
+$host='118.232.212.69';
+$dbName='SmartSeating';
+$user='smartseating';
+$pass='q96yji4jo4';
 $dsn="$dbms:host=$host;dbname=$dbName";
 
 try {
-    $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
-    //echo "连接成功<br/>";
+    $dbh = new PDO($dsn, $user, $pass); 
 
-    $i=0;
-    $seating = array();
-    $tocheck_examID = 1;
-    $seatingID = null;
+    //$targetExamID = $_GET['examID'];
     $seatIDARR = array();
     $stuIDArr = array();
     $statusArr = array();
@@ -22,17 +18,12 @@ try {
 
     $dbh->query("SET NAMES 'UTF8'");
 
-    foreach ($dbh->query('SELECT * from Seating where examID=1') as $row) {
-        //print_r($row); //你可以用 echo($GLOBAL); 来看到这些值
-        //echo $row["id"] . " " . $row["state"] . "<br>";
-        //$classroom[$i]["id"] = $row["id"];
-        //$classroom[$i++]["state"] = $row["state"];
-        if($row["examID"] == $tocheck_examID){
-            $seatIDArr = explode(',', $row["seatID_array"]);
-            $stuIDArr = explode(',', $row["username_array"]);
-            $statusArr = explode(',', $row["status_array"]);
-            break;
-        }
+    foreach ($dbh->query('SELECT * from Seating where examID='.$targetExamID) as $row) {
+        
+        $seatIDArr = explode(',', $row["seatID_array"]);
+        $stuIDArr = explode(',', $row["username_array"]);
+        $statusArr = explode(',', $row["status_array"]);
+        
     }
     foreach( $stuIDArr as $username){
         if(strcmp($username, "n")!=0){
@@ -66,8 +57,7 @@ try {
     die ("Error!: " . $e->getMessage() . "<br/>");
 }
 
-//默认这个不是长连接，如果需要数据库长连接，需要最后加一个参数：array(PDO::ATTR_PERSISTENT => true) 变成这样：
-//$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+
 ?>
 <script type="text/javascript">   
     window.seatingID=<?php echo $seatingID ?>;
@@ -79,4 +69,5 @@ try {
     window.classArr = <?php echo json_encode($classArr); ?>;
     window.backupSeatID = seatIDArr.slice();
     window.backupStuID = stuIDArr.slice();
+    window.backupStatus = statusArr.slice();
 </script>  

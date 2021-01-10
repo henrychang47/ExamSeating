@@ -27,20 +27,20 @@ function selectionChanged(graph) {
 
         mxUtils.writeln(center, '座位id: ' + cell.id);
         mxUtils.writeln(center, "-------------------------------------")
-        if ( seatIDArr.includes(cell.id) ){
-            
+        if (seatIDArr.includes(cell.id)) {
+
             if (stuIDArr[seatIDArr.indexOf(cell.id)] != "n") {
                 mxUtils.writeln(center, "帳號: " + cell.getValue() + "");
-                mxUtils.writeln(center, "姓名: "+nameArr[seatIDArr.indexOf(cell.id)]);
-                mxUtils.writeln(center, "班級: "+classArr[seatIDArr.indexOf(cell.id)]);
-            }else{
+                mxUtils.writeln(center, "姓名: " + nameArr[seatIDArr.indexOf(cell.id)]);
+                mxUtils.writeln(center, "班級: " + classArr[seatIDArr.indexOf(cell.id)]);
+            } else {
                 mxUtils.writeln(center, "空位");
             }
 
-        }else{
+        } else {
             mxUtils.writeln(center, "未登記的座位");
         }
- 
+
         div.appendChild(center);
         mxUtils.br(div);
 
@@ -53,8 +53,7 @@ function selectionChanged(graph) {
             if (moveto == null) {
                 //alert("cancel");
                 graph.getSelectionModel().removeCell(cell);
-            }
-            else if(moveto == "-1"){
+            } else if (moveto == "-1") {
                 statusArr[seatIDArr.indexOf(cell.id)] = 1;
             }
             //輸入不可換入的座位號碼
@@ -77,7 +76,7 @@ function stateAutoRefresh() {
         cell = graph.getModel().getCell(seatID);
         if (statusArr[index] == "0") {
             cell.setStyle("fillColor=#CFD2DE");
-            cell.setValue( "("+cell.id+")" );
+            cell.setValue("(" + cell.id + ")");
         } else if (statusArr[index] == "1") {
             cell.setStyle("fillColor=#D1E1CB");
             cell.setValue(stuIDArr[index]);
@@ -137,6 +136,7 @@ function cancelEdit() {
     document.getElementById("finishEditBtn").disabled = true;
 
     stuIDArr = backupStuID.slice();
+    statusArr = backupStatus.slice();
     stateAutoRefresh();
 }
 
@@ -163,9 +163,9 @@ function setInfobox() {
     statusArr.forEach(function(status, index) {
         if (status == "0") {
             unassigned_count++;
-        }else if(status == "1"){
+        } else if (status == "1") {
             login_count++;
-        }else if(status == "2"){
+        } else if (status == "2") {
             backupLogin_count++;
         }
     })

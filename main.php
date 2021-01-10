@@ -1,4 +1,5 @@
 <?php
+    $targetExamID=$_POST["examID"];
     require("pdo.php");
 ?>
 <html>
@@ -86,7 +87,7 @@
             <tr>          
                 <td >
                     <div id="tools" style="border: solid 3px black; padding: 10px;  height: 50px;">
-                        <button class="tool_button">離開</button>
+                        <button class="tool_button" onclick="history.back()">離開</button>
                         <button class="tool_button" onclick="editMode()" id="editBtn">變更座位</button>
                         <button class="tool_button" onclick="cancelEdit()" id="cancelEditBtn" disabled="true">取消變更</button>
                         <button class="tool_button" onclick="finishEdit()" id="finishEditBtn" disabled="true">完成變更</button>
