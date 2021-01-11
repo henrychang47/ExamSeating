@@ -203,7 +203,7 @@ function setAutoReload(value, change) {
         window.clearTimeout(window.timeoutID);
     }
     if (value > 0) {
-        window.timeoutID = window.setTimeout(function() { location.href = "main.php?autoReload=" + value }, value * 1000);
+        window.timeoutID = window.setTimeout(function() { location.href = "main.php?examID="+examID+"&autoReload=" + value }, value * 1000);
         document.getElementById("autoReloader").value = value;
         console.log(timeoutID);
     } else if (value == 0) {

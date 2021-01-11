@@ -1,5 +1,11 @@
 <?php
-    $targetExamID=$_POST["examID"];
+    if(isset($_GET["examID"])){
+        $targetExamID=$_GET["examID"];
+    }
+    else{
+        $targetExamID=$_POST["examID"];
+    }
+    
     require("pdo.php");
 ?>
 <html>
