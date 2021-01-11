@@ -207,6 +207,6 @@ function setAutoReload(value, change) {
         document.getElementById("autoReloader").value = value;
         console.log(timeoutID);
     } else if (value == 0) {
-        location.href = "main.php";
+        location.href = "main.php?examID="+examID;
     }
 }
